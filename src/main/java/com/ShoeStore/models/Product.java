@@ -1,8 +1,9 @@
 package com.ShoeStore.models;
 
 import javax.persistence.Entity;
+import javax.persistence.MappedSuperclass;
 
-
+@MappedSuperclass
 public abstract class Product {
 	
 	private long productNumber;

@@ -10,7 +10,7 @@ public class ShippingInfo {
 	private String city;
 	private String state;
 	private String postcode;
-	
+    
 	private Customer customer;
 	
 	public ShippingInfo() {}

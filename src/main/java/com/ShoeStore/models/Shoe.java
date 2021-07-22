@@ -23,7 +23,6 @@ public class Shoe extends Product {
 		this.setName(name);
 		this.setCategory("Shoe");
 		this.setInStock(true);
-		
 	}
 	
 }

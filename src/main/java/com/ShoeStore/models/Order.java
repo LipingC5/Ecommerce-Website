@@ -7,18 +7,27 @@ import java.util.List;
 import javax.persistence.Entity;
 
 @Entity
-public class Order {
+public class Order extends Container {
 	
 	private long orderNumber;
-	private double amount;
 	private Date date;
+	private boolean delivered;
+	
 	private Customer customer;
+	private PaymentForm paymentForm;
 	private List<Product> products = new ArrayList<Product>();
 	
 	public Order() {}
 	
-	public Order(Customer customer, List<Product> products) {
+	public Order(Customer customer) {
 		date = new Date();
+		this.customer = customer;
+		setProducts(customer.getCart().getProducts());
+		setAmount(customer.getCart().getAmount());
+		setQuantity(customer.getCart().getQuantity());
+		setDelivered(false);
+		customer.getCart().clearCart();
+		
 	}
 
 	public long getOrderNumber() {
@@ -27,14 +36,6 @@ public class Order {
 
 	public void setOrderNumber(long orderNumber) {
 		this.orderNumber = orderNumber;
-	}
-
-	public double getAmount() {
-		return amount;
-	}
-
-	public void setAmount(double amount) {
-		this.amount = amount;
 	}
 
 	public Date getDate() {
@@ -69,6 +70,22 @@ public class Order {
 	public Product removeProduct(Product product) {
 		products.remove(product);
 		return product;
+	}
+
+	public PaymentForm getPaymentForm() {
+		return paymentForm;
+	}
+
+	public void setPaymentForm(PaymentForm paymentForm) {
+		this.paymentForm = paymentForm;
+	}
+
+	public boolean isDelivered() {
+		return delivered;
+	}
+
+	public void setDelivered(boolean delivered) {
+		this.delivered = delivered;
 	}
 	
 }
