@@ -1,13 +1,22 @@
-package com.ShoeStore.models;
+package com.ShoeStore.ShoeStore.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class PaymentForm {
-	
+	@Id
 	private int id;
 	private String cardType;
 	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "order_number")
+	@JsonIgnore
 	private Order order;
 	
 	public PaymentForm() {}

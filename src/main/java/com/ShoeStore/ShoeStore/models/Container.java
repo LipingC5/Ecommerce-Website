@@ -1,8 +1,12 @@
-package com.ShoeStore.models;
+package com.ShoeStore.ShoeStore.models;
 
 import java.util.List;
 
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+
 import com.ShoeStore.exceptions.ProductNotFoundException;
+
 
 public abstract class Container {
 	

@@ -1,16 +1,25 @@
-package com.ShoeStore.models;
+package com.ShoeStore.ShoeStore.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class ShippingInfo {
-	
+	@Id
 	private int id;
 	private String address;
 	private String city;
 	private String state;
 	private String postcode;
     
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "customer_id")
+	@JsonIgnore
 	private Customer customer;
 	
 	public ShippingInfo() {}

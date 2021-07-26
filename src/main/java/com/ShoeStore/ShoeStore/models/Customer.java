@@ -1,19 +1,31 @@
-package com.ShoeStore.models;
+package com.ShoeStore.ShoeStore.models;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+import com.ShoeStore.exceptions.OrderDoesNotExistException;
 
 @Entity
 public class Customer {
-	
+	@Id
 	private int id;
 	private String name;
 	private String email;
 	private String number;
+	
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "customer")
 	private Cart cart;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
 	private List<Order> orders = new ArrayList<Order>();
+	
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "customer")	
 	private ShippingInfo shippingInfo;
 	
 	public Customer() {}
@@ -83,8 +95,12 @@ public class Customer {
 		return order;
 	}
 	
-	public Order removeOrder(Order order) {
-		orders.remove(order);
+	public Order removeOrder(Order order) throws OrderDoesNotExistException {
+		try {
+			orders.remove(order);
+		} catch(Exception e) {
+			throw new OrderDoesNotExistException("This Order does Not Exist");
+		}
 		return order;
 	}
 	

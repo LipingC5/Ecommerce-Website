@@ -1,26 +1,52 @@
-package com.ShoeStore.models;
+package com.ShoeStore.ShoeStore.models;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@Table(name = "Ordered")
 public class Order extends Container {
 	
-	private long orderNumber;
-	private Date date;
+	@Id
+	private String orderNumber;
+	
+	@Column(name = "ordered_date")
+	private LocalDateTime orderedDate;
+	
+	@Column(name = "is_delivered")
 	private boolean delivered;
 	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "customer_id")
+	@JsonIgnore
 	private Customer customer;
+	
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "order")
 	private PaymentForm paymentForm;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
 	private List<Product> products = new ArrayList<Product>();
 	
 	public Order() {}
 	
 	public Order(Customer customer) {
-		date = new Date();
+		orderedDate = LocalDateTime.now();
 		this.customer = customer;
 		setProducts(customer.getCart().getProducts());
 		setAmount(customer.getCart().getAmount());
@@ -30,20 +56,20 @@ public class Order extends Container {
 		
 	}
 
-	public long getOrderNumber() {
+	public String getOrderNumber() {
 		return orderNumber;
 	}
 
-	public void setOrderNumber(long orderNumber) {
+	public void setOrderNumber(String orderNumber) {
 		this.orderNumber = orderNumber;
 	}
 
-	public Date getDate() {
-		return date;
+	public LocalDateTime getDate() {
+		return orderedDate;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setDate(LocalDateTime d) {
+		this.orderedDate = d;
 	}
 
 	public Customer getCustomer() {

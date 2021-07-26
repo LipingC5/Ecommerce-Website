@@ -1,18 +1,41 @@
-package com.ShoeStore.models;
+package com.ShoeStore.ShoeStore.models;
+
+import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
-@MappedSuperclass
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Product {
 	
-	private long productNumber;
+	@Id
+	private String SKU;
 	private String name;
 	private String category;
+	private Date releaseDate;
 	private double price;
 	private String brand;
 	private int ratings;
 	private boolean inStock;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "cart_id")
+	@JsonIgnore
+	private Cart cart;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "order_number")
+	@JsonIgnore
+	private Order order;
 	
 	public Product() {}
 	
@@ -22,12 +45,30 @@ public abstract class Product {
 		this.price = price;
 	}
 	
-	public long getProductNumber() {
-		return productNumber;
+	
+
+	public Cart getCart() {
+		return cart;
 	}
 
-	public void setProductNumber(long productNumber) {
-		this.productNumber = productNumber;
+	public void setCart(Cart cart) {
+		this.cart = cart;
+	}
+
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+
+	public String getSKU() {
+		return SKU;
+	}
+
+	public void setSKU(String sKU) {
+		SKU = sKU;
 	}
 
 	public String getName() {
@@ -78,7 +119,13 @@ public abstract class Product {
 		this.brand = brand;
 	}
 
-	
+	public Date getReleaseDate() {
+		return releaseDate;
+	}
+
+	public void setReleaseDate(Date releaseDate) {
+		this.releaseDate = releaseDate;
+	}
 	
 }
   
