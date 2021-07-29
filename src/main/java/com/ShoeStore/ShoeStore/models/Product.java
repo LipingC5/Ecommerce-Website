@@ -29,7 +29,6 @@ public abstract class Product {
 	private double price;
 	private String brand;
 	private int ratings;
-	private int quantity;
 	private boolean inStock;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -113,14 +112,6 @@ public abstract class Product {
 
 	public void setInStock(boolean inStock) {
 		this.inStock = inStock;
-	}
-
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
 	}
 
 	public int getRatings() {

@@ -24,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Order extends Container {
 	
 	@Id
-	private String orderNumber;
+	private long orderNumber;
 	
 	@Column(name = "ordered_date")
 	private LocalDateTime orderedDate;
@@ -56,11 +56,11 @@ public class Order extends Container {
 		
 	}
 
-	public String getOrderNumber() {
+	public long getOrderNumber() {
 		return orderNumber;
 	}
 
-	public void setOrderNumber(String orderNumber) {
+	public void setOrderNumber(long orderNumber) {
 		this.orderNumber = orderNumber;
 	}
 
