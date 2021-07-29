@@ -2,12 +2,14 @@ package com.ShoeStore.ShoeStore.models;
 
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.MappedSuperclass;
 
 import com.ShoeStore.exceptions.ProductNotFoundException;
 
-
+@MappedSuperclass
 public abstract class Container {
 	
 	private int quantity;

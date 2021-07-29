@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.ShoeStore.ShoeStore.models.Shoe;
 
-public interface ShoeRepository extends JpaRepository<Shoe, String> {
+public interface ShoeRepository extends JpaRepository<Shoe, Integer> {
 	
 }

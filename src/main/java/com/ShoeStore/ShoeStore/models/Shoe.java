@@ -10,9 +10,7 @@ import javax.persistence.Table;
 public class Shoe extends Product {
 	
 	private double size;
-	
 	private String gender;
-
 	private String color1;
 	private String color2;
 	private String color3;
@@ -29,6 +27,20 @@ public class Shoe extends Product {
 		this.color3 = color3;
 		this.color4 = color4;
 		this.setName(name);
+		this.setSKU(SKUGenerator.getInstance().generateSKU(brand));
+		this.setCategory("Shoe");
+		this.setInStock(true);
+	}
+	
+	public Shoe(String name, double size, String color1, String color2, 
+	String color3, String color4, String brand, String sku) {
+		this.size = size;
+		this.color1 = color1;
+		this.color2 = color2;
+		this.color3 = color3;
+		this.color4 = color4;
+		this.setName(name);
+		this.setSKU(sku);
 		this.setCategory("Shoe");
 		this.setInStock(true);
 	}

@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -18,6 +20,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public abstract class Product {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
 	private String SKU;
 	private String name;
 	private String category;
@@ -25,6 +29,7 @@ public abstract class Product {
 	private double price;
 	private String brand;
 	private int ratings;
+	private int quantity;
 	private boolean inStock;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -43,9 +48,16 @@ public abstract class Product {
 		this.name = name;
 		this.category = category;
 		this.price = price;
+		this.SKU = SKUGenerator.getInstance().generateSKU(category);
 	}
-	
-	
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public Cart getCart() {
 		return cart;
@@ -101,6 +113,14 @@ public abstract class Product {
 
 	public void setInStock(boolean inStock) {
 		this.inStock = inStock;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 
 	public int getRatings() {
