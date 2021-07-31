@@ -10,7 +10,7 @@ import javax.persistence.Table;
 public class Shoe extends Product {
 	
 	private double size;
-	private String gender;
+	private char gender;
 	private String color1;
 	private String color2;
 	private String color3;
@@ -19,7 +19,7 @@ public class Shoe extends Product {
 	public Shoe() {}
 	
 	public Shoe(String name, double size, String color1, 
-	String color2, String color3, String color4, String brand) {
+	String color2, String color3, String color4, String brand, double price, char gender) {
 		
 		this.size = size;
 		this.color1 = color1;
@@ -30,10 +30,13 @@ public class Shoe extends Product {
 		this.setSKU(SKUGenerator.getInstance().generateSKU(brand));
 		this.setCategory("Shoe");
 		this.setInStock(true);
+		this.setPrice(price);
+		this.setBrand(brand);
+		this.setGender(gender);
 	}
 	
 	public Shoe(String name, double size, String color1, String color2, 
-	String color3, String color4, String brand, String sku) {
+	String color3, String color4, String brand, String sku, double price) {
 		this.size = size;
 		this.color1 = color1;
 		this.color2 = color2;
@@ -43,6 +46,9 @@ public class Shoe extends Product {
 		this.setSKU(sku);
 		this.setCategory("Shoe");
 		this.setInStock(true);
+		this.setPrice(price);
+		this.setBrand(brand);
+		this.setGender(gender);
 	}
 
 	public double getSize() {
@@ -53,11 +59,11 @@ public class Shoe extends Product {
 		this.size = size;
 	}
 	
-	public String getGender() {
+	public char getGender() {
 		return gender;
 	}
 
-	public void setGender(String gender) {
+	public void setGender(char gender) {
 		this.gender = gender;
 	}
 

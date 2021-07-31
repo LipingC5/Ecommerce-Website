@@ -25,6 +25,7 @@ public abstract class Product {
 	private String SKU;
 	private String name;
 	private String category;
+	private String url;
 	private Date releaseDate;
 	private double price;
 	private String brand;
@@ -73,7 +74,7 @@ public abstract class Product {
 	public void setOrder(Order order) {
 		this.order = order;
 	}
-
+	
 	public String getSKU() {
 		return SKU;
 	}
@@ -96,6 +97,14 @@ public abstract class Product {
 
 	public void setCategory(String category) {
 		this.category = category;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	public double getPrice() {
