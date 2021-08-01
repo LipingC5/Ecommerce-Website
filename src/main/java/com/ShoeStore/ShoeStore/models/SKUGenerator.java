@@ -20,7 +20,9 @@ public class SKUGenerator {
 	
 	
 	public String generateSKU(String brand) {
-		SKU = brand.substring(0, 3).toUpperCase();
+		SKU = brand;
+		SKU = brand.substring(0, 3);
+		SKU = SKU.toUpperCase();
 		SKU = SKU + generateNumber().substring(0, 2) + "-" + generateNumber().substring(2, 4);
 		return SKU;
 	}

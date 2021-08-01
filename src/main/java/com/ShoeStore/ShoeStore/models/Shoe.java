@@ -19,36 +19,32 @@ public class Shoe extends Product {
 	public Shoe() {}
 	
 	public Shoe(String name, double size, String color1, 
-	String color2, String color3, String color4, String brand, double price, char gender) {
+	String color2, String color3, String color4, String brand, 
+	double price, char gender, String url) {
+		
+		super(name, "shoe", price, url, brand, true);
 		
 		this.size = size;
 		this.color1 = color1;
 		this.color2 = color2;
 		this.color3 = color3;
 		this.color4 = color4;
-		this.setName(name);
-		this.setSKU(SKUGenerator.getInstance().generateSKU(brand));
-		this.setCategory("Shoe");
-		this.setInStock(true);
-		this.setPrice(price);
-		this.setBrand(brand);
-		this.setGender(gender);
+		setSKU(SKUGenerator.getInstance().generateSKU(this.getBrand()));
+		setGender(gender);
 	}
 	
-	public Shoe(String name, double size, String color1, String color2, 
-	String color3, String color4, String brand, String sku, double price) {
+	public Shoe(String name, double size, String color1, 
+	String color2, String color3, String color4, String brand, 
+	double price, char gender, String url, String sku) {
+		
+        super(name, "shoe", price, url, brand, true);
 		this.size = size;
 		this.color1 = color1;
 		this.color2 = color2;
 		this.color3 = color3;
 		this.color4 = color4;
-		this.setName(name);
-		this.setSKU(sku);
-		this.setCategory("Shoe");
-		this.setInStock(true);
-		this.setPrice(price);
-		this.setBrand(brand);
-		this.setGender(gender);
+		setSKU(sku);
+		setGender(gender);
 	}
 
 	public double getSize() {

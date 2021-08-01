@@ -50,6 +50,16 @@ public abstract class Product {
 		this.price = price;
 		this.SKU = SKUGenerator.getInstance().generateSKU(category);
 	}
+	
+	public Product(String name, String category, double price, String url, String brand, boolean inStock) {
+		this.name = name;
+		this.category = category;
+		this.price = price;
+		this.SKU = SKUGenerator.getInstance().generateSKU(category);
+		this.url = url;
+		this.brand = brand; 
+		this.inStock = true;
+	}
 
 	public int getId() {
 		return id;
