@@ -46,10 +46,4 @@ public class ShoeController {
 		return shoeService.getShoeById(id);
 	}
 	
-	@PostMapping("/shoe/{id}/copy/{quantity}")
-	@ResponseStatus(HttpStatus.CREATED)
-	public List<Shoe> addCopy(@PathVariable int id, @PathVariable int quantity) throws ProductNotFoundException {
-		return shoeService.addCopy(id, quantity);
-	}
-	
 }

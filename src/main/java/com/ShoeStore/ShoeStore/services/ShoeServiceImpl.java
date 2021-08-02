@@ -21,41 +21,41 @@ public class ShoeServiceImpl implements ShoeService {
 	@Override
 	public List<Shoe> addShoe(Shoe shoe,int  quantity) {
 		// TODO Auto-generated method stub
-	    //shoe.setSKU(SKUGenerator.getInstance().generateSKU(shoe.getBrand()));
+	    
+		List<Shoe> response = new ArrayList<Shoe>(quantity);
+		
 		shoe = new Shoe(shoe.getName(), shoe.getSize(), 
 		shoe.getColor1(), shoe.getColor2(), shoe.getColor3(), shoe.getColor4(), 
-		shoe.getBrand(), shoe.getPrice(), shoe.getGender(), shoe.getUrl());
+		shoe.getBrand(), shoe.getPrice(),  shoe.getUrl());
 		
 		String sku = shoe.getSKU();
 		
 		for(int i = 0; i < shoeRepository.findAll().size(); i++) {
-			if(shoeRepository.findAll().get(i).getName() == shoe.getName()) {
+			if(shoeRepository.findAll().get(i).getName().equals(shoe.getName())) {		
 				sku = shoeRepository.findAll().get(i).getSKU();
+			}
+			else if (sku.equals(shoeRepository.findAll().get(i).getSKU())){
+				sku = SKUGenerator.getInstance().generateSKU(shoe.getBrand(), sku);
 			}
 		}
 		
+		shoe.setSKU(sku);
+		
 		shoeRepository.save(shoe);
+		response.add(shoe);
 		
 		for(int i = 0; i < quantity - 1; i++) {
 			shoe = new Shoe(shoe.getName(), shoe.getSize(), 
 			shoe.getColor1(), shoe.getColor2(), shoe.getColor3(), shoe.getColor4(), 
-			shoe.getBrand(), shoe.getPrice(), shoe.getGender(), shoe.getUrl(), sku);
+			shoe.getBrand(), shoe.getPrice(), shoe.getUrl(), sku);
+			shoe.setSize2(shoe.getSize() + 1.5);
 			
 			shoeRepository.save(shoe);
-			
+			response.add(shoe);
 		}
-		return shoeRepository.findAll();
-	
-	}
-
-	@Override
-	public Shoe addShoe(String name, double size, String color1, String color2, String color3, String color4,
-	String brand, double price, char gender, String url) {
-		// TODO Auto-generated method stub
-		Shoe shoe =  new Shoe(name, size, color1, color2, color3, color4, brand, price, gender, url);
 		
-		shoeRepository.save(shoe);
-		return shoe;
+		return response;
+		
 	}
 	
 
@@ -87,29 +87,5 @@ public class ShoeServiceImpl implements ShoeService {
 			return shoe;
 		}
 	}
-
-	@Override
-	public List<Shoe> addCopy(int id, int quantity) throws ProductNotFoundException {
-		// TODO Auto-generated method stub
-		Shoe shoe = shoeRepository.findById(id).orElse(null);
-		List<Shoe> list = new ArrayList<Shoe>();
-		if(shoe == null) {
-			throw new ProductNotFoundException("Product Not Found");
-		}
-		else {
-			
-			for(int i = 0; i < quantity; i++) {
-				shoeRepository.save(shoe);
-				list.add(shoe);
-			}
-			
-			return list;
-		}
-	}
-
-
-	
-	
-
 
 }
