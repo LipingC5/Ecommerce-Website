@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +21,7 @@ import com.ShoeStore.ShoeStore.services.ShoeService;
 import com.ShoeStore.exceptions.ProductNotFoundException;
 
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 public class ShoeController {
@@ -28,10 +30,14 @@ public class ShoeController {
 	@Autowired
 	ShoeService shoeService;
 	
-	
 	@GetMapping(value ="/shoes")
 	public List<Shoe> getShoes() {
 		return shoeService.getShoes();
+	}
+	
+	@GetMapping(value ="/differentshoes")
+	public List<Shoe>getNonDuplicateShoes(){
+		return shoeService.getNonDuplicateShoes();
 	}
 	
 	@PostMapping("/shoe/{quantity}")
@@ -46,4 +52,13 @@ public class ShoeController {
 		return shoeService.getShoeById(id);
 	}
 	
+	@DeleteMapping("/shoe/{id}")
+	public Shoe removeShoe(@PathVariable int id) throws ProductNotFoundException {
+		return shoeService.removeShoeById(id);
+	}
+	
+	@GetMapping("/shoe")
+	public List<Shoe> getShoesBySku(@RequestParam String sku) {
+		return shoeService.getShoesBySKU(sku);
+	}
 }

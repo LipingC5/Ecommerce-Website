@@ -30,6 +30,7 @@ public class ShoeServiceImpl implements ShoeService {
 		
 		String sku = shoe.getSKU();
 		
+		//optimize this
 		for(int i = 0; i < shoeRepository.findAll().size(); i++) {
 			if(shoeRepository.findAll().get(i).getName().equals(shoe.getName())) {		
 				sku = shoeRepository.findAll().get(i).getSKU();
@@ -88,4 +89,34 @@ public class ShoeServiceImpl implements ShoeService {
 		}
 	}
 
+	@Override
+	public List<Shoe> getNonDuplicateShoes() {
+		// TODO Auto-generated method stub
+		List<Shoe> response = new ArrayList<Shoe>();
+		String name = "";
+		
+		for(int i = 0; i < shoeRepository.findAll().size(); i++) {
+			
+			if(!name.equals(shoeRepository.findAll().get(i).getName())) {
+				name =  shoeRepository.findAll().get(i).getName();
+				response.add(shoeRepository.findAll().get(i));
+			}
+			
+		}
+		return response;
+	}
+
+	@Override
+	public List<Shoe> getShoesBySKU(String sku) {
+		// TODO Auto-generated method stub
+		List<Shoe> response = new ArrayList<Shoe>();
+	    for(int i = 0; i < shoeRepository.findAll().size(); i++) {
+	    	if(shoeRepository.findAll().get(i).getSKU().equals(sku)){
+	    		response.add(shoeRepository.findAll().get(i));
+	    	}
+	    }
+		return response;
+	}
+
+	
 }
