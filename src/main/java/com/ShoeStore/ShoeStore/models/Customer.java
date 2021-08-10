@@ -5,17 +5,22 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.ShoeStore.exceptions.OrderDoesNotExistException;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Customer {
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	private String name;
+	private String firstName;
+	private String lastName;
 	private String email;
 	private String number;
 	
@@ -25,13 +30,17 @@ public class Customer {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
 	private List<Order> orders = new ArrayList<Order>();
 	
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "customer")	
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "customer")
 	private ShippingInfo shippingInfo;
 	
 	public Customer() {}
 	
-	public Customer(String name, String email, String number) {
-		
+	public Customer(String firstName, String lastName, String email, String number) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.number = number;
+		//this.shippingInfo = shippingInfo;
 	}
 
 	public int getId() {
@@ -42,12 +51,20 @@ public class Customer {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public String getEmail() {
@@ -111,11 +128,7 @@ public class Customer {
 			if(orders.get(i).getOrderNumber() == order.getOrderNumber())
 				orderExists = true;
 		}
-		
 		if(orderExists)return order;
 		else return null;
 	}
-	
-	
-	
 }

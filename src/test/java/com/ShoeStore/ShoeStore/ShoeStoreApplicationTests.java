@@ -36,7 +36,7 @@ class ShoeStoreApplicationTests {
 	@Test
 	public void processItems() throws ProductNotFoundException {
 		String color = "black";
-		Shoe shoe = new Shoe("shoe", 9, color, color, color, color, "Nike", 90.00, 'M', "");
+		Shoe shoe = new Shoe("shoe", 9, color, color, color, color, "Nike", 90.00, "");
 		shoe.setPrice(90.0);
 		Cart cart = new Cart();
 		

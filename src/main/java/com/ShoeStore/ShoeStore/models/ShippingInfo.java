@@ -2,6 +2,8 @@ package com.ShoeStore.ShoeStore.models;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -11,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class ShippingInfo {
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String address;
 	private String city;
@@ -19,13 +22,16 @@ public class ShippingInfo {
     
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "customer_id")
-	@JsonIgnore
+    @JsonIgnore
 	private Customer customer;
 	
 	public ShippingInfo() {}
 	
 	public ShippingInfo(String address, String city, String state, String postcode) {
-		
+		this.address = address;
+		this.city = city;
+		this.state = state;
+		this.postcode = postcode;
 	}
 
 	public int getId() {
