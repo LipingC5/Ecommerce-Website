@@ -57,8 +57,14 @@ public class ShoeController {
 		return shoeService.removeShoeById(id);
 	}
 	
-	@GetMapping("/shoe")
+	@GetMapping("/shoes/")
 	public List<Shoe> getShoesBySku(@RequestParam String sku) {
 		return shoeService.getShoesBySKU(sku);
 	}
+	
+	@GetMapping("/shoe/")
+	public Shoe getShoeBySku(@RequestParam String sku) throws ProductNotFoundException {
+		return shoeService.getShoeBySKU(sku);
+	}
+	
 }

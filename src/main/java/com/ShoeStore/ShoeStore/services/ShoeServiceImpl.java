@@ -92,6 +92,7 @@ public class ShoeServiceImpl implements ShoeService {
 	@Override
 	public List<Shoe> getNonDuplicateShoes() {
 		// TODO Auto-generated method stub
+		// thinking of using binary search to optimize this method 
 		List<Shoe> response = new ArrayList<Shoe>();
 		String name = "";
 		
@@ -111,11 +112,33 @@ public class ShoeServiceImpl implements ShoeService {
 		// TODO Auto-generated method stub
 		List<Shoe> response = new ArrayList<Shoe>();
 	    for(int i = 0; i < shoeRepository.findAll().size(); i++) {
-	    	if(shoeRepository.findAll().get(i).getSKU().equals(sku)){
+	    	
+	    	if(shoeRepository.findAll().get(i).getSKU().equals(sku)
+	    	 && shoeRepository.findAll().get(i).isInStock()){
+	    		
 	    		response.add(shoeRepository.findAll().get(i));
 	    	}
 	    }
 		return response;
+	}
+
+
+	@Override
+	public Shoe getShoeBySKU(String sku)throws ProductNotFoundException {
+		// TODO Auto-generated method stub
+		Shoe shoe = null;
+        for(int i = 0; i < shoeRepository.findAll().size(); i++) {
+	    	
+	    	if(shoeRepository.findAll().get(i).getSKU().equals(sku)
+	    	 && shoeRepository.findAll().get(i).isInStock()){
+	    		
+	    		shoe = shoeRepository.findAll().get(i);
+	    	}
+	    }
+        
+        if(shoe == null) throw new ProductNotFoundException("Product Unavailable");
+        
+		return shoe;   
 	}
 
 	

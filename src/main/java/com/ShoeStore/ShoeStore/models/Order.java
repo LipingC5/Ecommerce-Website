@@ -10,6 +10,8 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -24,6 +26,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Order extends Container {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long orderNumber;
 	
 	@Column(name = "ordered_date")
@@ -32,27 +35,29 @@ public class Order extends Container {
 	@Column(name = "is_delivered")
 	private boolean delivered;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "customer_id")
 	@JsonIgnore
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "customer_id")
 	private Customer customer;
 	
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "order")
 	private PaymentForm paymentForm;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "order")
 	private List<Product> products = new ArrayList<Product>();
 	
 	public Order() {}
 	
 	public Order(Customer customer) {
 		orderedDate = LocalDateTime.now();
-		this.customer = customer;
+		customer.addOrder(this);
+		setCustomer(customer);
 		setProducts(customer.getCart().getProducts());
 		setAmount(customer.getCart().getAmount());
 		setQuantity(customer.getCart().getQuantity());
 		setDelivered(false);
-		customer.getCart().clearCart();
+		//customer.getCart().clearCart();
+		
 		
 	}
 

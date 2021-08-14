@@ -2,6 +2,7 @@ package com.ShoeStore.ShoeStore.models;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -37,8 +38,8 @@ public abstract class Product {
 	@JsonIgnore
 	private Cart cart;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "order_number")
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "ordered_number")
 	@JsonIgnore
 	private Order order;
 	

@@ -68,6 +68,8 @@ public class Cart extends Container {
 	
 	public List<Product> clearCart(){
 		items.clear();
+		this.setAmount(0);
+		this.setQuantity(0);
 		return items;
 	}
 	

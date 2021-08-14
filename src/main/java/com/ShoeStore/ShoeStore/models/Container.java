@@ -40,12 +40,17 @@ public abstract class Container {
 	
 	protected Product process(Product item, boolean inStock, List<Product> items) throws ProductNotFoundException {
 		item.setInStock(inStock);
-		setAmount(getTotalCostOfProducts(items));
 		
-		try {if(inStock) items.remove(item); else items.add(item);}
-		catch(Exception e) {throw new ProductNotFoundException("Not found");}
+		try {
+			if(inStock) items.remove(item); 
+			else items.add(item);
+			
+		}catch(Exception e) {
+			throw new ProductNotFoundException("Not found");
+		}
 		
 		setQuantity(getTotalOfProducts(items));
+		setAmount(getTotalCostOfProducts(items));
 		return item;
 	}
 	

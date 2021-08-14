@@ -14,6 +14,7 @@ public interface ShoeService {
 	public Shoe removeShoeById(int id) throws ProductNotFoundException;
 	public List<Shoe> getNonDuplicateShoes();
 	public List<Shoe> getShoesBySKU(String sku);
+	public Shoe getShoeBySKU(String sku)throws ProductNotFoundException;
 	
 }
 
