@@ -1,0 +1,268 @@
+header{
+    background:black;
+    padding-top:25px;
+    margin-top: -15px;
+    margin-left: -10px;
+    margin-right: -11px;
+    margin-bottom: 85px;
+}
+
+header::after{
+    content: '';
+    display: table;
+    clear: both;
+}
+.title{
+    font-family: 'Jura', sans-serif;
+    color:white;
+    margin-left: 670px;
+    margin-bottom: -50px;
+    padding-bottom: 25px;
+}
+
+
+.link{
+    display: inline-block;
+    margin-right: 70px;
+}
+
+
+nav a{
+    color:white;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: 'Jura', sans-serif;
+    display: flex;
+}
+
+.image{
+    float: right;
+    margin-right: 50px;
+    padding-top: 10px;
+}
+
+.price{
+    color: #FFFFFF;
+    font-family: 'Jura', sans-serif;
+    float: right;
+    margin-right: 125px;
+}
+
+nav a:hover{
+    color:#FFFFFF;
+    text-decoration: underline;
+}
+  .salutation{
+      position: relative;
+      text-align: center;
+      font-family:'Jura', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 25px;
+      border: 3px solid white;
+      width: 30%;
+      margin-left: 550px;
+      margin-bottom: 675px;
+      background-color: #FFFFFF;
+      border-radius: 20px;
+      padding-left: 3px;
+      display: flex;
+      justify-content: center;
+    
+  }
+
+  .button{
+    position: relative;
+    text-align: center;
+    font-family:'Jura', sans-serif;
+    text-transform: uppercase;
+    border: 3px solid black;
+    background-color:black;
+    color:white;
+    display: inline-block;
+    text-decoration: none;
+    margin-left: -325px;
+    margin-top: 350px;
+    margin-bottom: 300px;
+    padding: 10px 24px;
+    font-size: 18px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+  }
+  .button:hover{
+    color:#FFFFFF;
+    text-decoration: underline;
+}
+
+footer{
+    position: relative;
+    top: 300px;
+
+    background:black;
+    margin-top: 290px;
+    margin-left: -20px;
+    margin-right: -12px;
+    padding-bottom: 200px;
+}
+
+.foot{
+    display: flex;
+    flex-direction: column;
+    margin-left: 500px;
+}
+
+.title-ft{
+    position: relative;
+    display: inline-block;
+    font-family:'Jura', sans-serif;
+    color: white;
+    margin-left: 200px;
+
+}
+
+.foot-link{
+    color: white;
+    text-decoration: none;
+    margin-bottom: 1rem;
+    font-family:'Jura', sans-serif;
+    font-size:xx-large;
+}
+
+.socials{
+    margin-left: 825px;
+    display: flex;
+    flex-direction: column;
+    margin-top: -215px;
+}
+.socials-link{
+    color: white;
+    text-decoration: none; 
+    margin-bottom: 1rem;
+    font-family:'Jura', sans-serif;
+    font-size:xx-large;
+
+}
+
+main{
+    position: absolute;
+    padding:0;
+    margin:0;
+
+    top:0;
+    left:0;
+
+    width: 100%;
+    height: 100%;
+    margin-top: 100px;
+    background-image: url(https://art-sheep.com/wp-content/uploads/2015/03/1022__880.jpg);
+    background-size: cover;
+    display: flex;
+    animation: slide 10s infinite;
+}
+
+body{
+    margin-left: -10px;
+    height: 120%;
+    border: 3px solid blue;
+}
+
+#container{
+display: flex;
+flex-direction: column;
+flex-wrap: wrap;
+align-content: stretch;
+}
+
+@media all and (max-width: 1100px){
+
+    header{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        padding-top: 100px;
+        margin-right:550px;
+    }
+
+
+    main{
+        margin-top: 180px;
+        margin-left: -100px;
+
+    }
+    .salutation{
+        margin-left: 200px;
+    }
+
+    .link{
+        display: flex;
+        flex-direction: column;
+        margin-right: 0px;
+    }
+
+    .title{
+
+        display: flex;
+        flex-direction: column;
+        margin-left: 40px;
+        margin-bottom: 5px;
+
+    }
+
+    .image{
+        float: unset;
+        margin-bottom: -100px;
+        margin-left: 200px;
+    }
+    .price{
+        display: flex;
+        flex-direction: column;
+        float: unset;
+        margin-left: 200px;
+        margin-bottom: -150px;
+
+    }
+
+
+    nav{
+        flex-direction: column;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    nav a{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+
+    footer{
+        flex-direction: column;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-right: 0px;
+        margin-left: -400px;
+
+    }
+    .foot-link{
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+}
+
+@keyframes slide{
+    0%{
+        background-image: url(https://art-sheep.com/wp-content/uploads/2015/03/1022__880.jpg);
+    }
+    33%{
+        background-image: url(https://i.redd.it/mo8hvmu3a0c01.jpg);
+    }
+    67%{
+        background-image: url(https://wallpapercave.com/wp/wp3654206.jpg);
+    }
+}
+
+
+
