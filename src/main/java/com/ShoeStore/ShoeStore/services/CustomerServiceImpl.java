@@ -12,6 +12,8 @@ import com.ShoeStore.ShoeStore.models.ShippingInfo;
 import com.ShoeStore.ShoeStore.repository.CartRepository;
 import com.ShoeStore.ShoeStore.repository.CustomerRepository;
 import com.ShoeStore.ShoeStore.repository.ShippingInfoRepository;
+import com.ShoeStore.ShoeStore.security.models.User;
+import com.ShoeStore.ShoeStore.security.repository.UserRepository;
 import com.ShoeStore.exceptions.NoResourceFoundException;
 import com.ShoeStore.exceptions.ProductNotFoundException;
 
@@ -26,16 +28,25 @@ public class CustomerServiceImpl implements CustomerService{
 	
 	@Autowired
 	CartRepository cartRepository;
-
+	
+	@Autowired
+     UserRepository userRepository;
+	
 	@Override
 	public Customer addCustomer(Customer customer) {
 		// TODO Auto-generated method stub
 		ShippingInfo shippingInfo = customer.getShippingInfo();
-		
+		User user = customer.getUser();
 		if(shippingInfo != null) {
 			shippingInfo.setCustomer(customer);
 			shippingInfoRepository.save(shippingInfo);
 		}
+		/*
+		if(user != null) {
+			user.setCustomer(customer);
+			userRepository.save(user);
+		}
+		*/
 		Cart cart = new Cart();
 		customer.setCart(cart);
 		cart.setCustomer(customer);

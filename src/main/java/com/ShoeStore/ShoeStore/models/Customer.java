@@ -3,19 +3,23 @@ package com.ShoeStore.ShoeStore.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.ShoeStore.ShoeStore.security.models.User;
 import com.ShoeStore.exceptions.OrderDoesNotExistException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Customer {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
@@ -33,6 +37,10 @@ public class Customer {
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "customer")
 	private ShippingInfo shippingInfo;
 	
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id")
+	private User user;
+	
 	public Customer() {}
 	
 	public Customer(String firstName, String lastName, String email, String number) {
@@ -41,6 +49,14 @@ public class Customer {
 		this.email = email;
 		this.number = number;
 		//this.shippingInfo = shippingInfo;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public int getId() {

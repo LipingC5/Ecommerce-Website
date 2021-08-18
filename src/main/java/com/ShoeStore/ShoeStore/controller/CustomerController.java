@@ -29,7 +29,7 @@ public class CustomerController {
 	public Customer addCustomer(@RequestBody@Valid Customer customer) {
 		return customerService.addCustomer(customer);
 	}
-	@GetMapping("/customer")
+	@GetMapping("/customers")
 	public List<Customer> getCustomers(){
 		return customerService.getCustomers();
 	}

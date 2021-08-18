@@ -1,6 +1,7 @@
 package com.ShoeStore.ShoeStore.services;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,41 +94,41 @@ public class ShoeServiceImpl implements ShoeService {
 	public List<Shoe> getNonDuplicateShoes() {
 		// TODO Auto-generated method stub
 		// thinking of using binary search to optimize this method 
-		List<Shoe> response = new ArrayList<Shoe>();
+		List<Shoe> shoes = new ArrayList<Shoe>();
 		String name = "";
 		
-		for(int i = 0; i < shoeRepository.findAll().size(); i++) {
+		for(int i = 0; i < shoeRepository.findAll().size(); i+=60) {
 			
 			if(!name.equals(shoeRepository.findAll().get(i).getName())) {
 				name =  shoeRepository.findAll().get(i).getName();
-				response.add(shoeRepository.findAll().get(i));
+				shoes.add(shoeRepository.findAll().get(i));
 			}
 			
 		}
-		return response;
+		return shoes;
 	}
 
 	@Override
 	public List<Shoe> getShoesBySKU(String sku) {
 		// TODO Auto-generated method stub
 		List<Shoe> response = new ArrayList<Shoe>();
-	    for(int i = 0; i < shoeRepository.findAll().size(); i++) {
+	    for(int i = 0; i < 60; i++) {
 	    	
 	    	if(shoeRepository.findAll().get(i).getSKU().equals(sku)
 	    	 && shoeRepository.findAll().get(i).isInStock()){
-	    		
 	    		response.add(shoeRepository.findAll().get(i));
 	    	}
 	    }
 		return response;
 	}
 
-
 	@Override
 	public Shoe getShoeBySKU(String sku)throws ProductNotFoundException {
 		// TODO Auto-generated method stub
 		Shoe shoe = null;
-        for(int i = 0; i < shoeRepository.findAll().size(); i++) {
+		
+	
+        for(int i = 0; i < shoeRepository.findAll().size(); i+=20) {
 	    	
 	    	if(shoeRepository.findAll().get(i).getSKU().equals(sku)
 	    	 && shoeRepository.findAll().get(i).isInStock()){
@@ -141,5 +142,24 @@ public class ShoeServiceImpl implements ShoeService {
 		return shoe;   
 	}
 
+	
+	private Shoe binarySearch(List<Shoe> shoes, int l, int r, int id, String sku ) {
+		
+		int mid = l + (r-l)/2;
+		
+		if(shoes.get(mid).getId() == id && shoes.get(mid).getSKU() != sku) {
+			return shoes.get(mid);
+		}
+		else if(shoes.get(mid).getId() > id && shoes.get(mid).getSKU() != sku){
+			return binarySearch(shoes, mid - 1, l, id, sku);
+		}
+		else if(shoes.get(mid).getId() < id && shoes.get(mid).getSKU() != sku){
+			return binarySearch(shoes, r, mid + 1, id, sku);
+		}
+		else {
+			return null;
+		}
+		
+	}
 	
 }
