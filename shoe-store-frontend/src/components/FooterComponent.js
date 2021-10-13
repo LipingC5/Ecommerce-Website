@@ -17,7 +17,7 @@ const Footer = () => {
                     </div>
 
                     <div className="row">
-                    <a className="white" href="Store"><p>STORE</p></a>
+                    <a className="white" href="/"><p>STORE</p></a>
                     </div>
 
                     <div className="row">
@@ -33,7 +33,7 @@ const Footer = () => {
                     </div>
 
                     <div className="row">
-                    <a className="white" href="Store"><p>CONTACT US</p></a>
+                    <a className="white" href="contactus"><p>CONTACT US</p></a>
                     </div>
 
                     <div className="row">
@@ -54,7 +54,7 @@ const Footer = () => {
                     </div>
 
                     <div className="row">
-                    <a className="white" href="Store"><p>ABOUT US</p></a>
+                    <a className="white" href="aboutus"><p>ABOUT US</p></a>
                     </div>
 
                     <div className="row">

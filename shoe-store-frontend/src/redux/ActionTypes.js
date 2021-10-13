@@ -1,0 +1,40 @@
+ export const DISPLAY_PRODUCTS = 'DISPLAY_PRODUCTS';
+ export const DISPLAY_PRODUCTS_FAILED = 'DISPLAY_PRODUCTS_FAILED';
+ export const DISPLAY_PRODUCTS_SUCCESS = 'DISPLAY_PRODUCTS_SUCCESS';
+
+ //display product by id
+ export const DISPLAY_PRODUCT = 'DISPLAY_PRODUCT';
+ export const DISPLAY_PRODUCT_FAILED = 'DISPLAY_PRODUCT_FAILED';
+ export const DISPLAY_PRODUCT_SUCCESS = 'DISPLAY_PRODUCT_SUCCESS';
+
+ //authentication
+export const LOGIN_REQUEST = 'LOGIN_REQUEST';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAILURE = 'LOGIN_FAILURE';
+export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
+export const LOGOUT_FAILURE = 'LOGOUT_FAILURE';
+
+
+//customer profile
+export const GET_CUSTOMER = 'GET_CUSTOMERS';
+export const CUSTOMERS_FAILED = 'GET_CUSTOMERS';
+export const CUSTOMERS_LOADING = 'GET_CUSTOMERS';
+
+
+//cart
+export const GET_CART = 'GET_CART';
+export const ADD_SHOE_TO_CART = 'ADD_TO_CART';
+export const REMOVE_SHOE_FROM_CART = 'REMOVE_SHOE_FROM_CART';
+export const CLEAR_CART = 'CLEAR_CART';
+export const CART_FAILED = 'GET_CART';
+export const CART_LOADING = 'CART_LOADING';
+
+//orders
+export const GET_ORDERS = 'GET_ORDERS';
+export const ADD_ORDERS = 'ADD_ORDERS';
+export const DELETE_ORDER = 'DELETE_ORDER';
+export const ORDERS_FAILED = 'ORDERS_FAILED';
+export const ORDERS_LOADING = 'ORDERS_LOADING';
+
+

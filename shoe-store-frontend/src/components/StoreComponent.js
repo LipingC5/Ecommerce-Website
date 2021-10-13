@@ -1,64 +1,121 @@
 import {Card, Button, Container, Row, Col, CardImg, CardText, CardBody,
-CardTitle, CardSubtitle} from'reactstrap';
+CardTitle, CardSubtitle, NavLink} from'reactstrap';
 import {Component} from 'react';
+import { useHistory, Link } from 'react-router-dom';
+import Loading from './LoadingComponent';
 
-let content = [3];
+let content;
 
- function renderProducts(){
-    for(let i in content){
-        if(i  % 3 === 0){
+ function renderProducts(shoes, addShoeToCart){
+    for(let i in shoes){
             content.push(
                <Row>
                  <Col xs="6" sm="4">
-                <Card>
+                <Card key={shoes[i].id}>
                 <CardImg variant="top" 
-                src="https://2app.kicksonfire.com/kofapp/upload/events_images/ipad_air-jordan-11-concord-2018-0.jpg"/>
+                src={shoes[i].url}/>
                 <CardBody>
-                <CardTitle>Air Jordan 11 Concord 2018</CardTitle>
-                <CardText>$300</CardText>
+                <CardTitle>{shoes[i].name}</CardTitle>
+                <CardText>${shoes[i].price}</CardText>
+                <Link to={{
+                   pathname: `/shoe/${shoes[i].id}`,
+                   state : {
+                    shoe:shoes[i],
+                    //addShoeToCart: addShoeToCart
+                  }
+                }}>
                <Button variant="primary">Click</Button>
+               </Link>
                 </CardBody>
             </Card>
             </Col>
+           
 
-            <Col xs="6" sm="4">
-                <Card>
+        
+                 <Col xs="6" sm="4">
+                <Card key={shoes[i].id}>
                 <CardImg variant="top" 
-                src="https://2app.kicksonfire.com/kofapp/upload/events_images/ipad_air-jordan-11-concord-2018-0.jpg"/>
+                src={shoes[i].url}/>
                 <CardBody>
-                <CardTitle>Air Jordan 11 Concord 2018</CardTitle>
-                <CardText>$300</CardText>
-               <Button variant="primary">Click</Button>
-                </CardBody>
-            </Card>
-            </Col>
+                <CardTitle>{shoes[i].name}</CardTitle>
+                <CardText>${shoes[i].price}</CardText>
+                <Link to={{
+                   pathname: `/shoe/${shoes[i].id}`,
+                   state : {
+                    shoe:shoes[i],
+                    //addShoeToCart: addShoeToCart
+                    
+                  }
 
-            <Col xs="6" sm="4">
-                <Card>
-                <CardImg variant="top" 
-                src="https://2app.kicksonfire.com/kofapp/upload/events_images/ipad_air-jordan-11-concord-2018-0.jpg"/>
-                <CardBody>
-                <CardTitle>Air Jordan 11 Concord 2018</CardTitle>
-                <CardText>$300</CardText>
-               <Button variant="primary">Click</Button>
+                }}>
+               <Button variant="primary" >Click</Button>
+               </Link>
                 </CardBody>
             </Card>
             </Col>
+            
+
+    
+                 <Col xs="6" sm="4">
+                <Card key={shoes[i].id}>
+                <CardImg variant="top" 
+                src={shoes[i].url}/>
+                <CardBody>
+                <CardTitle>{shoes[i].name}</CardTitle>
+                <CardText>${shoes[i].price}</CardText>
+                <Link to={{
+                   pathname: `/shoe/${shoes[i].id}`,
+                   state : {
+                    shoe:shoes[i],
+                   // addShoeToCart: addShoeToCart
+
+                   }
+                }}>
+               <Button variant="primary">Click</Button>
+               </Link>
+                </CardBody>
+            </Card>
+            </Col>
+  
 
             </Row>
 
             );
-          }
         }
     }
 
-   const Store = () => {
-       renderProducts();
+   const Store = (props) => {
+
+    if (!props.shoes) {
+        return (
+
+        <div>
+          <Loading/>
+        </div>
+
+     );
+    }
+    else if(props.shoes.length === 0){
+        return (
+            <div>
+              <Loading/>
+            </div>
+         );
+    }
+    else{
+        
+        content = [props.shoes.length];
+
+        console.log(props.addShoeToCart);
+        
+        renderProducts(props.shoes[0], props.addShoeToCart);
         return(
-            <Container>
+            <Container className="res">
                 {content}
             </Container>
         );
+
+    }
     }
 
 export default Store;

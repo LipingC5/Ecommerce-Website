@@ -6,7 +6,7 @@ function Welcome() {
    
         return(
             <div>
-            <Container>
+            <Container  className="res">
                 <Carousel fade>
                     <Carousel.Item interval={1500}>
                         <img

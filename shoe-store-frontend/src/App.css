@@ -52,3 +52,19 @@ body .bg-darker{
   background-color: #000000;
 
 }
+
+.res{
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.selected-image{
+  border: 1px solid transparent !important;
+}
+
+.center {
+
+  margin-left: 325px;
+  margin-right: 325px;
+ 
+}
