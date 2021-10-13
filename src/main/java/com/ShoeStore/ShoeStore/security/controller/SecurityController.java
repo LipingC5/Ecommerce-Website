@@ -1,9 +1,12 @@
 package com.ShoeStore.ShoeStore.security.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,6 +22,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,6 +31,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.ShoeStore.ShoeStore.security.AuthenticationRequest;
 import com.ShoeStore.ShoeStore.security.filters.JwtRequestFilter;
@@ -35,8 +40,9 @@ import com.ShoeStore.ShoeStore.security.services.UserService;
 import com.ShoeStore.ShoeStore.security.util.JwtUtil;
 
 
+@CrossOrigin(origins = "*")
 @RestController
-public class SecurityController {
+class SecurityController {
 	@Autowired
 	private AuthenticationManager authenticationManager;
 
@@ -117,8 +123,10 @@ public class SecurityController {
 
 }
 
+@Configuration
 @EnableWebSecurity
-class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+ class WebSecurityConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
+	
 	@Autowired
 	private UserDetailsService myUserDetailsService;
 	@Autowired
@@ -139,21 +147,27 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public AuthenticationManager authenticationManagerBean() throws Exception {
 		return super.authenticationManagerBean();
 	}
-
+	  
+	
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
-		//httpSecurity.csrf().disable()
-		httpSecurity.cors().and().csrf().disable() //added .cors().and()
+		
+		httpSecurity.cors().and().csrf().disable()  
 				.authorizeRequests()
-				.antMatchers("/authenticate").permitAll()
+			    .antMatchers("/authenticate").permitAll()
+				.antMatchers("/differentshoes").permitAll()
 				.antMatchers("/authenticate/createuser").permitAll()
 				.antMatchers("/customers").hasRole("ADMIN")
-				.antMatchers(HttpMethod.GET,"/shoes").hasAnyRole("ADMIN", "USER")
+				.antMatchers(HttpMethod.GET,"/shoes").permitAll()
+				.antMatchers("/Me**").hasRole("USER")
 				.anyRequest().authenticated()
 				.and().exceptionHandling()
 				.and().sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		httpSecurity.headers().frameOptions().disable();
 		httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+		
 	}
-
 }
+
+

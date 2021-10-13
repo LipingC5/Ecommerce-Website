@@ -23,11 +23,11 @@ public class OrderController {
 	OrderService orderService;
 	
 	@PostMapping("/customer/{id}/order/add")
-	public Order addOrder(@PathVariable int id, @RequestBody PaymentForm payment) throws NoResourceFoundException, CartIsEmptyException {
+	public List<Order> addOrder(@PathVariable int id, @RequestBody PaymentForm payment) throws NoResourceFoundException, CartIsEmptyException {
 		return orderService.addOrder(id, payment);
 	}
 	@DeleteMapping("/order/{orderId}/delete")
-	public Order deleteOrder(@PathVariable long orderId) throws NoResourceFoundException {
+	public List<Order> deleteOrder(@PathVariable long orderId) throws NoResourceFoundException {
 		return orderService.deleteOrder(orderId);
 	}
 	@GetMapping("/order/{id}") 

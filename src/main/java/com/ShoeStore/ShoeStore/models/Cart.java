@@ -30,7 +30,7 @@ public class Cart extends Container {
 	private Customer customer;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cart")
-	private List<Product> items = new ArrayList<Product>();
+	private List<Product> products = new ArrayList<Product>();
 	
 	public Cart() {}
 	
@@ -51,26 +51,26 @@ public class Cart extends Container {
 	}
 
 	public List<Product> getProducts() {
-		return items;
+		return products;
 	}
 
-	public void setProducts(List<Product> items) {
-		this.items = items;
+	public void setProducts(List<Product> products) {
+		this.products = products;
 	}
 	
 	public Product addItem(Product item) throws ProductNotFoundException {
-		return process(item, false, items);
+		return process(item, false, products);
 	}
 	
 	public Product removeItem(Product item) throws ProductNotFoundException {
-		return process(item, true, items);
+		return process(item, true, products);
 	}
 	
 	public List<Product> clearCart(){
-		items.clear();
+		products.clear();
 		this.setAmount(0);
 		this.setQuantity(0);
-		return items;
+		return products;
 	}
 	
 	

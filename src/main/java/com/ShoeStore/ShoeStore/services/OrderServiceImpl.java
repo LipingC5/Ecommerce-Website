@@ -39,7 +39,7 @@ public class OrderServiceImpl implements OrderService {
 	
 	
 	@Override
-	public Order addOrder(int id, PaymentForm payment) throws NoResourceFoundException, CartIsEmptyException {
+	public List <Order> addOrder(int id, PaymentForm payment) throws NoResourceFoundException, CartIsEmptyException {
 		// TODO Auto-generated method stub
 		Customer customer = customerRepository.findById(id).orElse(null);
 		if(customer == null) {
@@ -82,11 +82,11 @@ public class OrderServiceImpl implements OrderService {
 			}
 		}
 		
-		return order;
+		return customer.getOrders();
 	}
 
 	@Override
-	public Order deleteOrder(long orderId) throws NoResourceFoundException {
+	public List<Order> deleteOrder(long orderId) throws NoResourceFoundException {
 		// TODO Auto-generated method stub
 
 		Order order = orderRepository.findById(orderId).orElse(null);
@@ -112,7 +112,7 @@ public class OrderServiceImpl implements OrderService {
 		customerRepository.save(customer);
 		paymentFormRepository.delete(order.getPaymentForm());
 		
-		return order;
+		return customer.getOrders();
 	}
 
 	@Override
@@ -130,6 +130,16 @@ public class OrderServiceImpl implements OrderService {
 		// TODO Auto-generated method stub
 		
 		return orderRepository.findAll();
+	}
+
+	@Override
+	public List<Order> getCustomerOrders(int id) throws NoResourceFoundException {
+		// TODO Auto-generated method stub
+		Customer customer = customerRepository.findById(id).orElse(null);
+		if(customer == null) {
+			throw new NoResourceFoundException("Customer Does Not Exist");
+		}
+		return customer.getOrders();
 	}
 
 }

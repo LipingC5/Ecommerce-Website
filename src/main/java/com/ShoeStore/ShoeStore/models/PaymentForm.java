@@ -15,7 +15,7 @@ public class PaymentForm {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	private String cardType;
+	private String cardNumber;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "order_number")
@@ -24,8 +24,8 @@ public class PaymentForm {
 	
 	public PaymentForm() {}
 	
-	public PaymentForm(String cardType) {
-		
+	public PaymentForm(String cardNumber) {
+		this.cardNumber = cardNumber;
 	}
 
 	public int getId() {
@@ -36,12 +36,12 @@ public class PaymentForm {
 		this.id = id;
 	}
 
-	public String getCardType() {
-		return cardType;
+	public String getCardNumber() {
+		return cardNumber;
 	}
 
-	public void setCardType(String cardType) {
-		this.cardType = cardType;
+	public void setCardNumber(String cardNumber) {
+		this.cardNumber = cardNumber;
 	}
 
 	public Order getOrder() {
