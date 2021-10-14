@@ -78,7 +78,8 @@ class Main extends Component {
                     <Route path="/paymentform" component={() => <PaymentForm cart ={this.props.cart} 
                     makeOrder ={this.props.makeOrder}/>}/>
                     <Route path="/signupform" component={signUp}/>
-                    <Route path="/user" component={() => <User customer = {this.props.customer}/> }/>
+                    <Route path="/user" component={() => <User customer = {this.props.customer} 
+                    orders={this.props.getOrders} removeOrder={this.props.removeOrder}/> }/>
                     <Route path="/editprofile" component={EditProfile} />
                     <Route path="/editshipping" component={ShippingAddress} />
                 </Switch>

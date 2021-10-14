@@ -12,7 +12,6 @@ const PaymentForm = (props) => {
     event.preventDefault();
     alert(JSON.stringify(PaymentForm));
     props.makeOrder(PaymentForm);
- 
     }
 
    if(props.cart === null){
@@ -58,7 +57,7 @@ const PaymentForm = (props) => {
                 <br/>
                 <FormGroup row>
                     <Col sm={10}>
-                    <Button type="submit" value="submit" href="/user">Confirm Payment</Button>
+                    <Button type="submit" value="submit">Confirm Payment</Button>
                     </Col>
                 </FormGroup>
             </Form> 

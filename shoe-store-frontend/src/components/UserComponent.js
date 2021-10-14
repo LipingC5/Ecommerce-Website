@@ -4,6 +4,7 @@ import Loading from './LoadingComponent';
 
 
 
+var ordersList = [null];
 let content;
 
 function renderUserPage(customer){
@@ -48,21 +49,23 @@ function renderUserPage(customer){
   }
 }
 
-const User = (customer) => {
-
-   //style={{border: '3px solid rgba(0, 0, 0, 1)',}}
-
-   if((customer.customer !== undefined && localStorage.getItem('token') !== null) && (customer.customer.shippingInfo !== undefined)){
-    return(
-       <div className="container">
-          
-            {renderUserPage(customer.customer)}
-            <Row>
-             <br/>
-           </Row>
-           <Row >
-               <Col  xs="5" md="5">
-               <h3>Order number: </h3>
+function renderOrders(orders){
+  if((orders !== undefined && localStorage.getItem('token') !== null)){
+    if(orders === null){
+      return (
+        <div>
+          <h1>No orders has been made</h1>
+        </div>
+      );
+    }
+     else{
+      content = [ordersList.length];
+     return(
+       ordersList.map((item) => {
+         content.push(
+           <Row>
+          <Col  xs="5" md="5">
+          <h3>Order number:{item.orderNumber} </h3>
       <Table>
       <thead>
         <tr>
@@ -73,36 +76,27 @@ const User = (customer) => {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Air Jordan 1 Blue</td>
-          <td><img src="https://cdn.shopify.com/s/files/1/0255/9429/8467/products/air-jordan-1-retro-high-white-university-blue-555088-134_1_gdxkyn_1800x1800.jpg?v=1615473630"
-          width="30%" height="30%"/></td>
-          <td>$120</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Air Jordan 1 Blue</td>
-          <td><img src="https://cdn.shopify.com/s/files/1/0255/9429/8467/products/air-jordan-1-retro-high-white-university-blue-555088-134_1_gdxkyn_1800x1800.jpg?v=1615473630"
-          width="30%" height="30%"/></td>
-          <td>$120</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Air Jordan 1 Blue</td>
-          <td><img src="https://cdn.shopify.com/s/files/1/0255/9429/8467/products/air-jordan-1-retro-high-white-university-blue-555088-134_1_gdxkyn_1800x1800.jpg?v=1615473630"
-          width="30%" height="30%"/></td>
-          <td>$120</td>
-        </tr>
+        {item.products.map((product) => {
+          return(
+           <tr>
+           <th scope="row">{product.sku}</th>
+          <td>{product.name}</td>
+           <td><img src={product.url}
+           width="30%" height="30%"/></td>
+           <td>${product.price}</td>
+         </tr>
+          );
+
+        })}
         <tr>
         <th>Total: </th>
-        <td> <h5>$360</h5></td>
+         <td> <h5>${item.amount}</h5></td>
         <td></td>
         <td></td>
         </tr>
         <tr>
         <th>Delivery Status: </th>
-        <td> <h5>Pending</h5></td>
+         <td> <h5>{item.delivered}</h5></td>
         <td></td>
         <td></td>
         </tr>
@@ -110,6 +104,31 @@ const User = (customer) => {
         </Table>
         </Col>
         </Row>
+
+         );
+       })
+         
+     );
+     }
+  }
+}
+
+const User = (props) => {
+
+   //style={{border: '3px solid rgba(0, 0, 0, 1)',}}
+   
+   if((props.customer !== undefined && localStorage.getItem('token') !== null) && (props.customer.shippingInfo !== undefined)){
+    console.log(props.orders);
+    ordersList = props.customer.orders;
+    renderOrders(props.orders);
+    return(
+       <div className="container">
+          
+            {renderUserPage(props.customer)}
+            <Row>
+             <br/>
+           </Row>
+           {content}
 
        </div> 
     );
