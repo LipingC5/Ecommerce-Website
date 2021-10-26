@@ -1,19 +1,58 @@
 import {Card, Button, Container, Row, Col, Form, FormGroup, Label, Input} from'reactstrap';
 import {Redirect} from 'react-router-dom';
+import React, {useState} from 'react';
+
+
+
+
+
+
+
 
 const ShoePage = (props) => {
 
-    let authorized = localStorage.getItem('token');
+    const [Size, setSize] = useState(props.shoe[0]);
+    const[selectedShoe, setSelectedShoe] = useState(props.shoe[0].size);
 
+    let authorized = localStorage.getItem('token');
+    let sizeOptions = [6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 13.5];
+    var options = [];
     if (authorized === null) {
         return <Redirect to="/login" />
     }
-    
-    const data = props.shoe[0];
-    console.log("this is the data : ");
-    console.log(data);
-    console.log(props);
 
+   
+     let stock = props.shoes[0];
+     const data = props.shoe[0];
+
+     const search = (sku) => {
+        console.log(Size);
+        setSelectedShoe(stock.filter((shoe) => (shoe.sku == sku && shoe.size == Size) && shoe.inStock === true)[0]);
+        console.log(selectedShoe);
+     }
+
+     function renderSizeOptions (options, sizeOptions) {
+        options = sizeOptions.map((option) => {
+            options.push(
+               <div>
+                   <Col style={{border:'3px solid black'}}>
+                   <Row>
+                    <Col>
+                    <h4>{option}M</h4>
+                    </Col>
+                    <Col>
+                    <h4>{option + 1.5}F</h4>
+                    </Col>
+                   </Row>  
+                   <Button onClick={() => {setSize(option); search(data.sku)}} active={Size == option}>Select</Button>
+                   </Col>
+               </div>
+           );
+       })
+    }
+
+
+    renderSizeOptions(options, sizeOptions);
     return (
         <div>
         <Container>
@@ -24,23 +63,10 @@ const ShoePage = (props) => {
             width="500px" height="400px"/>
             </Row>
             <Row>
-               <Form inline>
-               <FormGroup>
-                 <Label for="exampleSelect">Size</Label>
-                  <Input type="select" name="select" id="exampleSelect">
-                   <option>6</option>
-                   <option>6.5</option>
-                   <option>7</option>
-                   <option>7.5</option>
-                   <option>8</option>
-                 </Input>
-              </FormGroup>
-              <br/>
-               </Form>
-              
+              {options}
          </Row>
          </Col>
-       
+
         <Col>
         <Row>
             <br></br>
@@ -59,11 +85,11 @@ const ShoePage = (props) => {
         </Row>
        <Row>
         <Col sm="2" md="4" >
-        <Button size="md"  onClick={props.addShoeToCart(data)} href="/cart">Buy Now</Button>
+        <Button size="md" onClick={props.addShoeToCart(selectedShoe)} href="/cart">Buy Now</Button>
         </Col>
 
         <Col sm ="2" md="4">
-        <Button  onClick={props.addShoeToCart(data)} href="/cart">Add To Cart</Button>
+        <Button  onClick={props.addShoeToCart(selectedShoe)} href="/cart">Add To Cart</Button>
         </Col>
         </Row> 
 

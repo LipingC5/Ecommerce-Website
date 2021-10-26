@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Form, FormGroup, Label, Input, Col, Button} from 'reactstrap';
 import Loading from './LoadingComponent';
-
+import { useHistory } from 'react-router-dom';
 
 
 const PaymentForm = (props) => {
@@ -12,6 +12,8 @@ const PaymentForm = (props) => {
     event.preventDefault();
     alert(JSON.stringify(PaymentForm));
     props.makeOrder(PaymentForm);
+
+    window.location.href = '/user';
     }
 
    if(props.cart === null){

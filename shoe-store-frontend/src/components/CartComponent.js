@@ -12,7 +12,14 @@ var items = [null, null, null];
 
 const Cart = (props) => {
 
-
+function renderShippingCosts(){
+  if(props.cart.products.length === 0){
+    return 0;
+  }
+  else{
+    return 5.99;
+  }
+}
 
   function renderProducts(){
     //items = props.cart.products;
@@ -27,7 +34,7 @@ const Cart = (props) => {
 
     else{
     
-     content = [items.length];
+     content = [];
 
      items.map((item) => {
        content.push(
@@ -68,7 +75,7 @@ const Cart = (props) => {
    <div className="col-sm-12">
      <h2>Subtotal: ${props.cart.amount}</h2> 
      <h6>+ shipping costs:${5.99}</h6>
-     <h1>Total:${props.cart.amount}</h1>
+     <h1>Total:${(props.cart.amount + 5.99)}</h1>
      <Button size="lg" href="/shop">Keep Shopping</Button>
     <br/>
     <br/>

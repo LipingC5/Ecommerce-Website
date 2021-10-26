@@ -5,7 +5,7 @@ import * as ActionTypes from './ActionTypes';
 export function getDifferentShoes(){
 
     return (dispatch) => {
-        return axios.get("http://localhost:8080/differentshoes")
+        return axios.get("http://localhost:8080/shoes")
         .then((response) => {
            if(response.status === 200){
                console.log(response.data);
@@ -236,7 +236,7 @@ export const addShoeToCart = (product) => (dispatch) => {
         })
         .then(response => response.json())
         .then(response => dispatch(addShoe(product)))
-        .catch(error => {console.log(error)});
+        .catch(error => {console.log(error.message)});
     }
 
 }

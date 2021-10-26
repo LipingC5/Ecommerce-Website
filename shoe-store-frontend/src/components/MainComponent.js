@@ -57,7 +57,7 @@ class Main extends Component {
         const ShoeWithId = ({match}) => {
             return(
               <ShoePage shoe={this.props.shoes[0].filter((shoe) => shoe.id === parseInt(match.params.shoeId,10))}
-              addShoeToCart = {this.props.addShoeToCart}
+              addShoeToCart = {this.props.addShoeToCart} shoes={this.props.shoes}
               />
             );
           };
