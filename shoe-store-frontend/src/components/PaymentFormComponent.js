@@ -7,15 +7,13 @@ import { useHistory } from 'react-router-dom';
 const PaymentForm = (props) => {
   
   const[PaymentForm, setPaymentForm] = useState({cardNumber: null});
-   
   const handleSubmit =  (event) => {
     event.preventDefault();
     alert(JSON.stringify(PaymentForm));
     props.makeOrder(PaymentForm);
 
-    window.location.href = '/user';
-    }
-
+    alert("Order has been made");
+  }
    if(props.cart === null){
     return(
       <Loading/>

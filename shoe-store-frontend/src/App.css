@@ -68,3 +68,7 @@ body .bg-darker{
   margin-right: 325px;
  
 }
+
+.hover-effect:hover {
+  background-color: red;
+}

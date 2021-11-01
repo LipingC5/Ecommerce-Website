@@ -7,15 +7,6 @@
  export const DISPLAY_PRODUCT_FAILED = 'DISPLAY_PRODUCT_FAILED';
  export const DISPLAY_PRODUCT_SUCCESS = 'DISPLAY_PRODUCT_SUCCESS';
 
- //authentication
-export const LOGIN_REQUEST = 'LOGIN_REQUEST';
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-export const LOGIN_FAILURE = 'LOGIN_FAILURE';
-export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
-export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
-export const LOGOUT_FAILURE = 'LOGOUT_FAILURE';
-
-
 //customer profile
 export const GET_CUSTOMER = 'GET_CUSTOMERS';
 export const CUSTOMERS_FAILED = 'GET_CUSTOMERS';
@@ -36,5 +27,11 @@ export const ADD_ORDERS = 'ADD_ORDERS';
 export const DELETE_ORDER = 'DELETE_ORDER';
 export const ORDERS_FAILED = 'ORDERS_FAILED';
 export const ORDERS_LOADING = 'ORDERS_LOADING';
+
+
+//Shipping Info
+export const EDIT_SHIPPING_INFO = 'EDIT_SHIPPING_INFO';
+export const SHIPPING_INFO_LOADING = 'SHIPPING_INFO_LOADING';
+export const SHIPPING_INFO_FAILED = 'SHIPPING_INFO_FAILED';
 
 

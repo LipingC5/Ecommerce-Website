@@ -2,6 +2,10 @@ import React from 'react';
 import { Col, Row, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 const signUp = () => {
+
+
+
+  
     return (
      <div className="container">
         <br/>

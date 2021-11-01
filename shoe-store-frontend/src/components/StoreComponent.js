@@ -12,7 +12,7 @@ let content;
       if(sku !== shoes[i].sku){
         sku = shoes[i].sku;
             content.push(
-               <Row>
+              
                  <Col xs="6" sm="4">
                 <Card key={shoes[i].id}>
                 <CardImg variant="top" 
@@ -27,60 +27,13 @@ let content;
                     //addShoeToCart: addShoeToCart
                   }
                 }}>
-               <Button variant="primary">Click</Button>
+               <Button outline color="danger">Click</Button>
                </Link>
                 </CardBody>
             </Card>
             </Col>
            
-
-        
-                 <Col xs="6" sm="4">
-                <Card key={shoes[i].id}>
-                <CardImg variant="top" 
-                src={shoes[i].url}/>
-                <CardBody>
-                <CardTitle>{shoes[i].name}</CardTitle>
-                <CardText>${shoes[i].price}</CardText>
-                <Link to={{
-                   pathname: `/shoe/${shoes[i].id}`,
-                   state : {
-                    shoe:shoes[i],
-                    //addShoeToCart: addShoeToCart
-                    
-                  }
-
-                }}>
-               <Button variant="primary" >Click</Button>
-               </Link>
-                </CardBody>
-            </Card>
-            </Col>
             
-
-    
-                 <Col xs="6" sm="4">
-                <Card key={shoes[i].id}>
-                <CardImg variant="top" 
-                src={shoes[i].url}/>
-                <CardBody>
-                <CardTitle>{shoes[i].name}</CardTitle>
-                <CardText>${shoes[i].price}</CardText>
-                <Link to={{
-                   pathname: `/shoe/${shoes[i].id}`,
-                   state : {
-                    shoe:shoes[i],
-                   // addShoeToCart: addShoeToCart
-
-                   }
-                }}>
-               <Button variant="primary">Click</Button>
-               </Link>
-                </CardBody>
-            </Card>
-            </Col>
-
-            </Row>
 
             );
             }
@@ -107,14 +60,16 @@ let content;
     }
     else{
         
-        content = [props.shoes.length];
+        content = [];
 
         console.log(props.addShoeToCart);
         
         renderProducts(props.shoes[0], props.addShoeToCart);
         return(
             <Container className="res">
+               <Row>
                 {content}
+                </Row>
             </Container>
         );
 

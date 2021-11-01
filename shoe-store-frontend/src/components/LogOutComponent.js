@@ -1,15 +1,19 @@
-import React from 'react';
-import {Button} from 'reactstrap';
+import React,{useState} from 'react';
+import {Modal, ModalHeader, ModalBody, ModalFooter, Button} from 'reactstrap';
 
-function Logout(props) {
+const Logout = (props) => {
+
     
     const logout = () => {
         localStorage.clear();
         window.location.href = "/login";
     }
+
     return (
+        <div>
         <span onClick={logout}>Logout</span>
-    )
+        </div>
+    );
 
 }
 export default Logout;

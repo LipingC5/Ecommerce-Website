@@ -59,7 +59,7 @@ function renderOrders(orders){
       );
     }
      else{
-      content = [ordersList.length];
+      content = [];
      return(
        ordersList.map((item) => {
          content.push(

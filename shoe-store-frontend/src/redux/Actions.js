@@ -36,74 +36,6 @@ export function displayProducts(shoes){
 }
 
 
-
-
-
-
-export const requestLogin = (creds) => {
-    return {
-        type: ActionTypes.LOGIN_REQUEST,
-        creds
-    }
-}
-  
-export const receiveLogin = (response) => {
-    return {
-        type: ActionTypes.LOGIN_SUCCESS,
-        token: response.token
-    }
-}
-  
-export const loginError = (message) => {
-    return {
-        type: ActionTypes.LOGIN_FAILURE,
-        message
-    }
-}
-
-export const loginUser = (creds) => (dispatch) => {
-    // We dispatch requestLogin to kickoff the call to the API
-    dispatch(requestLogin(creds))
-
-    return axios.post('http://localhost:8080/authenticate', {
-        method: 'POST',
-        headers: { 
-            'Content-Type':'application/json' 
-        },
-        body: JSON.stringify(creds)
-    })
-    .then(response => {
-        if (response.ok) {
-            return response;
-        } else {
-            var error = new Error('Error ' + response.status + ': ' + response.statusText);
-            error.response = response;
-            throw error;
-        }
-        },
-        error => {
-            throw error;
-        })
-    .then(response => response.json())
-    .then(response => {
-        if (response.success) {
-            // If login was successful, set the token in local storage
-            localStorage.setItem('token', response.token);
-            localStorage.setItem('creds', JSON.stringify(creds));
-            // Dispatch the success action
-            dispatch(receiveLogin(response));
-        }
-        else {
-            var error = new Error('Error ' + response.status);
-            error.response = response;
-            throw error;
-        }
-    })
-    .catch(error => dispatch(loginError(error.message)))
-};
-
-
-
 //customers
 export function getCustomer(){
 
@@ -366,7 +298,7 @@ export function cartFailed(errmess){
     }
 }
 
-
+//orders
 export const makeOrder = (PaymentForm) => (dispatch) => {
     const bearer = 'Bearer ' + localStorage.getItem('token');
     //dispatch(ordersLoading(true));
@@ -546,8 +478,66 @@ export function clearOrders(orders){
     }
 }
 
+//shipping info
+export const editShippingInfo = (shippingInfo) => (dispatch) => {
+    const bearer = 'Bearer ' + localStorage.getItem('token');
+
+   // dispatch(loadingShippingInfo(true));
+
+    return(dispatch) => {
+        axios({
+            method: 'PUT',
+            url: 'http://localhost:8080/Me/customer/shippinginfo',
+            headers:{
+                'Authorization': bearer,
+                'Content-Type': 'application/json'
+            },
+            data: JSON.stringify(shippingInfo)
+        })
+        .then((response) => {
+            if(response.status == 200){
+                console.log(response.data);
+                return response;
+            }
+            else{
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+        error => {
+            var errmess = new Error(error.message);
+            console.log(error.message);
+            throw errmess;
+        })
+        .then(response => response.json())
+        .then(response => dispatch(updateShippingInfo(shippingInfo)))
+        .then(response => console.log(response))
+        .catch(error => {console.log(error)})
+    }
+}
 
 
+export function updateShippingInfo(shippingInfo){
+    return {
+        type: ActionTypes.EDIT_SHIPPING_INFO,
+        payload: shippingInfo
+    }
+}
+
+export function loadingShippingInfo(isLoading){
+    return {
+        type: ActionTypes.SHIPPING_INFO_LOADING,
+        isLoading: isLoading
+    }
+}
+
+export function shippingInfoFailed(errmess){
+    return {
+        type: ActionTypes.SHIPPING_INFO_FAILED,
+        payload: errmess
+    }
+}
 
 
 

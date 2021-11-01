@@ -23,7 +23,8 @@ const mapStateToProps = (state) => {
           shoes: state.shoes.shoes,
           customer: state.customer.customer,
           cart: state.cart.cart,
-          orders: state.orders.orders
+          orders: state.orders.orders,
+          shippingInfo: state.shippingInfo.shippingInfo
       }
 }
 
@@ -37,7 +38,8 @@ const mapDispatchToProps = (dispatch) => ({
     clearCart: () => dispatch(actionCreators.clearAllFromCart()),
     getOrders: () => dispatch(actionCreators.getOrders()),
     makeOrder: (paymentForm) => dispatch(actionCreators.makeOrder(paymentForm)),
-    removeOrder: (orderId) => dispatch(actionCreators.removeOrder(orderId))
+    removeOrder: (orderId) => dispatch(actionCreators.removeOrder(orderId)),
+    editShippingInfo: (shippingInfo) => dispatch(actionCreators.editShippingInfo(shippingInfo))
 });
 
 
@@ -81,7 +83,7 @@ class Main extends Component {
                     <Route path="/user" component={() => <User customer = {this.props.customer} 
                     orders={this.props.getOrders} removeOrder={this.props.removeOrder}/> }/>
                     <Route path="/editprofile" component={EditProfile} />
-                    <Route path="/editshipping" component={ShippingAddress} />
+                    <Route path="/editshipping" component={() => <ShippingAddress editShippingInfo={this.props.editShippingInfo}/>} />
                 </Switch>
                 <Footer/>             
             </div>
