@@ -28,6 +28,8 @@ import Logout from './LogOutComponent';
           );
         }
         else{
+            if(localStorage.getItem('role') == '[ROLE_USER]'){
+
             return(
             <Navbar bg="darker" variant="dark" expand="lg" sticky="top">
             <Container>
@@ -67,6 +69,45 @@ import Logout from './LogOutComponent';
             </Container>
         </Navbar>
             );
+
+            }
+            else{
+
+                return(
+                    <Navbar bg="darker" variant="dark" expand="lg" sticky="top">
+                    <Container>
+                        <Navbar.Brand href="/" >Shoe Store</Navbar.Brand>
+                        <Nav>
+        
+                          <Link to="/">
+                          <Nav.Link href="/">Home</Nav.Link>
+                          </Link>
+                          <Link to="/shop">
+                          <Nav.Link href="shop">Shop</Nav.Link>
+                          </Link>
+                          <Link to="/aboutus">
+                          <Nav.Link href="aboutus">About Us</Nav.Link>
+                          </Link>
+                          <Link to="/contactus">
+                          <Nav.Link href="contactus">Contact</Nav.Link>
+                          </Link>
+                          <Link to="/login">
+                          <Nav.Link href="login">
+                              <Logout/>
+                          </Nav.Link>
+                          </Link>
+                          <Link to="/admin">
+                          <Nav.Link href="/admin">
+                          <img src="../images/user_logo.png" 
+                          width="30" height="30"  className="d-inline-block align-top"/>
+                          </Nav.Link>
+                          </Link>
+                       </Nav>
+                    </Container>
+                </Navbar>
+                    );
+
+            }
 
         }
     }

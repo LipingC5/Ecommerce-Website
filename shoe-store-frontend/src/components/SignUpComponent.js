@@ -1,11 +1,26 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Col, Row, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
-const signUp = () => {
+class SignUp extends Component{
 
+  constructor(props){
+    super(props);
 
+    this.state = {
+      firstName:"",
+      lastName:"",
+      email:"",
+      number:"",
+      address:"",
+      city: "",
+      state: "",
+      postcode: "",
+      username:"",
+      password:""
+    }
+  }
 
-  
+   render(){
     return (
      <div className="container">
         <br/>
@@ -103,6 +118,7 @@ const signUp = () => {
 
     </div>
     );
+   }
 }
 
-export default signUp;
+export default SignUp;

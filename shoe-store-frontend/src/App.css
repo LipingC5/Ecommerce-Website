@@ -41,6 +41,10 @@ body .bg-darker{
   background-color: #000000!important;
 }
 
+body .bg-gray{
+  background-color: #D3D3D3!important;
+}
+
 .black{
   color:#000000 !important;
 }

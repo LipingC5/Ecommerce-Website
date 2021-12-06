@@ -11,11 +11,14 @@ import Cart from './CartComponent';
 import PaymentForm from './PaymentFormComponent';
 import signUp from './SignUpComponent';
 import User from './UserComponent';
+import Admin from './AdminComponent';
+import AddShoe from './AddShoeComponent';
 import EditProfile from './EditProfile';
 import ShippingAddress from './EditShippingInfo';
 import {BrowserRouter as Router, Switch, Route, Redirect, withRouter, Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import * as actionCreators from '../redux/Actions';
+import { act } from 'react-dom/test-utils';
 
 
 const mapStateToProps = (state) => {
@@ -31,6 +34,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
     getDifferentShoes:() => {dispatch(actionCreators.getDifferentShoes())},
+    addProductToStore:(shoe) => dispatch(actionCreators.addProductToStore(shoe)),
     getCustomer:() => {dispatch(actionCreators.getCustomer())},
     getCart: () => {dispatch(actionCreators.getCart(dispatch))},
     addShoeToCart: (shoe) => dispatch(actionCreators.addShoeToCart(shoe)),
@@ -84,6 +88,8 @@ class Main extends Component {
                     orders={this.props.getOrders} removeOrder={this.props.removeOrder}/> }/>
                     <Route path="/editprofile" component={EditProfile} />
                     <Route path="/editshipping" component={() => <ShippingAddress editShippingInfo={this.props.editShippingInfo}/>} />
+                    <Route path="/admin" component={() => <Admin/>}/>
+                    <Route path="/addshoe" component={() => <AddShoe addProductToStore={this.props.addProductToStore} />} />
                 </Switch>
                 <Footer/>             
             </div>

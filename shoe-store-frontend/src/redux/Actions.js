@@ -28,11 +28,66 @@ export function getDifferentShoes(){
     }
 }
 
+export const addProductToStore = (product) => (dispatch) =>{
+
+    const bearer = 'Bearer ' + localStorage.getItem('token');
+
+    
+    return(dispatch) => {
+        axios({
+            method: 'POST',
+            url: 'http://localhost:8080/shoe',
+            headers: {
+                'Authorization': bearer,
+                'Content-Type': 'application/json'
+            },
+            data: JSON.stringify(product)
+        })
+        .then((response) => {
+            if(response.status === 201){
+                console.log(response.data);
+                return response;
+            }
+            else{
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+
+        },
+        error => {
+            var errmess = new Error(error.message);
+            console.log(error.message);
+            throw errmess;
+        })
+        .then(response => response.json())
+        .then(response => dispatch(addToInventory(product)))
+        .catch(error => {console.log(error.message)});
+    }
+
+
+}
+
 export function displayProducts(shoes){
     return{
         type: ActionTypes.DISPLAY_PRODUCTS,
         payload: shoes
     }
+}
+
+export function addToInventory(shoe){
+    return{
+        type: ActionTypes.ADD_PRODUCT,
+        payload: shoe
+    }
+}
+
+export function productsFailed(errmess){
+    return{
+        type: ActionTypes.PRODUCTS_FAILED,
+        payload: errmess
+    }
+
 }
 
 
