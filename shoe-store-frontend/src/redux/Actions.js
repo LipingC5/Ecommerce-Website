@@ -1,11 +1,12 @@
 import axios from "axios";
 import { Cookies } from 'react-cookie';
 import * as ActionTypes from './ActionTypes';
+import { API_ENDPOINT} from '../api/APIKey';
 
 export function getDifferentShoes(){
 
     return (dispatch) => {
-        return axios.get("http://localhost:8080/shoes")
+        return axios.get( API_ENDPOINT + "shoes")
         .then((response) => {
            if(response.status === 200){
                console.log(response.data);
@@ -36,7 +37,7 @@ export const addProductToStore = (product) => (dispatch) =>{
     return(dispatch) => {
         axios({
             method: 'POST',
-            url: 'http://localhost:8080/shoe',
+            url:  API_ENDPOINT + 'shoe',
             headers: {
                 'Authorization': bearer,
                 'Content-Type': 'application/json'
@@ -100,7 +101,7 @@ export function getCustomer(){
 
         dispatch(customerLoading(true));
 
-        axios.get('http://localhost:8080/Me', {
+        axios.get( API_ENDPOINT + 'Me', {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': bearer           
@@ -156,7 +157,7 @@ export function getCart(dispatch){
     dispatch(cartLoading(true));
 
     return(dispatch) => {
-        axios.get('http://localhost:8080/Me/cart', {
+        axios.get( API_ENDPOINT + 'Me/cart', {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': bearer           
@@ -197,7 +198,7 @@ export const addShoeToCart = (product) => (dispatch) => {
     return(dispatch) => {
         axios({
             method: 'POST',
-            url: 'http://localhost:8080/Me/cart/addshoe',
+            url:  API_ENDPOINT + 'Me/cart/addshoe',
             headers: {
                 'Authorization': bearer,
                 'Content-Type': 'application/json'
@@ -237,7 +238,7 @@ export const removeShoeFromCart = (product) => (dispatch) => {
     return(dispatch) => {
         axios({
             method: 'PUT',
-            url: 'http://localhost:8080/Me/cart/removeshoe',
+            url:  API_ENDPOINT + 'Me/cart/removeshoe',
             headers: {
                 'Authorization': bearer,
                 'Content-Type': 'application/json'
@@ -280,7 +281,7 @@ export const clearAllFromCart = (dispatch) => {
     return(dispatch) => {
         axios({
             method: 'PUT',
-            url: 'http://localhost:8080/Me/cart/clear',
+            url:  API_ENDPOINT + 'Me/cart/clear',
             headers: {
                 'Authorization': bearer,
                 'Content-Type': 'application/json'
@@ -359,7 +360,7 @@ export const makeOrder = (PaymentForm) => (dispatch) => {
     //dispatch(ordersLoading(true));
         axios({
             method: 'POST',
-            url: 'http://localhost:8080/Me/orders/add',
+            url:  API_ENDPOINT + 'Me/orders/add',
             headers:{
                 'Authorization': bearer,
                 'Content-Type': 'application/json'
@@ -394,7 +395,7 @@ export const removeOrder = (orderId) => (dispatch) => {
     return(dispatch) => {
         axios({
             method: 'DELETE',
-            url: 'http://localhost:8080/Me/orders/'+ orderId +'/remove',
+            url:  API_ENDPOINT + 'Me/orders/'+ orderId +'/remove',
             headers:{
                 'Authorization': bearer,
                 'Content-Type': 'application/json'
@@ -429,7 +430,7 @@ export const fetchOrders = (dispatch) => {
     return(dispatch) => {
         axios({
             method: 'GET',
-            url: 'http://localhost:8080/Me/orders',
+            url:  API_ENDPOINT + 'Me/orders',
             headers:{
                 'Authorization': bearer,
                 'Content-Type': 'application/json'
@@ -463,7 +464,7 @@ export const clearAllOrders = (dispatch) => {
     return(dispatch) => {
         axios({
             method: 'DELETE',
-            url: 'http://localhost:8080/Me/orders/clear',
+            url:  API_ENDPOINT + 'Me/orders/clear',
             headers:{
                 'Authorization': bearer,
                 'Content-Type': 'application/json'
@@ -542,7 +543,7 @@ export const editShippingInfo = (shippingInfo) => (dispatch) => {
     return(dispatch) => {
         axios({
             method: 'PUT',
-            url: 'http://localhost:8080/Me/customer/shippinginfo',
+            url:  API_ENDPOINT + 'Me/customer/shippinginfo',
             headers:{
                 'Authorization': bearer,
                 'Content-Type': 'application/json'

@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import Link from '@material-ui/core/Link';
 import {Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-
+import { API_ENDPOINT} from '../api/APIKey';
 
 
 const required = (val) => val && val.length;
@@ -59,7 +59,7 @@ class Login extends Component{
          "username": this.state.username,
          "password": this.state.password
      }
-     fetch('http://localhost:8080/authenticate',{
+     fetch(API_ENDPOINT + 'authenticate',{
          method: 'POST',
          body: JSON.stringify(payload),
          headers: {
