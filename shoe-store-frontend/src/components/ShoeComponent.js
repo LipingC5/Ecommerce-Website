@@ -6,12 +6,20 @@ const ShoePage = (props) => {
 
     const [Size, setSize] = useState(props.shoe[0].size);
     const[selectedShoe, setSelectedShoe] = useState(props.shoe[0]);
+    
+    useEffect(() => {
+        // take action when isVisible Changed
+        //console.log("useEffect: "  + Size);
+        search(selectedShoe.sku);
+        //console.log(selectedShoe);
+     }, [Size, selectedShoe])
 
     let authorized = localStorage.getItem('token');
     let sizeOptions = [4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 
     8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 13.5, 14];
 
     var options = [];
+
     if (authorized === null) {
         return <Redirect to="/login" />
     }
@@ -54,6 +62,7 @@ const ShoePage = (props) => {
     }
     renderSizeOptions(options, sizeOptions);
 
+    
    
 
     return (

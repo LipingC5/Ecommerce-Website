@@ -197,7 +197,7 @@ export const addShoeToCart = (product) => (dispatch) => {
 
     return(dispatch) => {
         axios({
-            method: 'POST',
+            method: 'PUT',
             url:  API_ENDPOINT + 'Me/cart/addshoe',
             headers: {
                 'Authorization': bearer,

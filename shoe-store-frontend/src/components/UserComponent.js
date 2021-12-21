@@ -23,7 +23,7 @@ function renderUserPage(customer){
         </div>
         <h6>{customer.email}</h6>
         <h4>{customer.number}</h4>
-        <Button size="sm" href="editprofile">Edit Profile</Button>
+       {/* <Button size="sm" href="editprofile">Edit Profile</Button>*/}
       </Col>
       
       <Col xs="4" md="4">

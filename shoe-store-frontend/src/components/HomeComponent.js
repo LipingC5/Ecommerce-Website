@@ -16,7 +16,7 @@ function Welcome() {
                         />
                         <Carousel.Caption>
                             <h3 className="black">Air Jordan 4s Bred 2019</h3>
-                            <p className="black">$279.99</p>
+                            <p className="black">$250</p>
                         </Carousel.Caption>
                     </Carousel.Item>
 
@@ -28,7 +28,7 @@ function Welcome() {
                         />
                         <Carousel.Caption>
                             <h3 className="black">Air Jordan 11s Concord 2018</h3>
-                            <p className="black">$279.99</p>
+                            <p className="black">$250</p>
                         </Carousel.Caption>
                     </Carousel.Item>
 
@@ -40,7 +40,7 @@ function Welcome() {
                         />
                         <Carousel.Caption>
                             <h3 className="black">Nike Air Forces White</h3>
-                            <p className="black">$90.00</p>
+                            <p className="black">$90</p>
                         </Carousel.Caption>
                     </Carousel.Item>
                 </Carousel>
