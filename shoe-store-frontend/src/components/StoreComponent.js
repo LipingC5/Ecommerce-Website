@@ -8,8 +8,8 @@ let content;
 
  function renderProducts(shoes, addShoeToCart){
    var sku = "";
-    for(let i in shoes){
-      if(sku !== shoes[i].sku){
+    for(let i = 0; i < shoes.length; i+=63){
+      if(sku != shoes[i].sku){
         sku = shoes[i].sku;
             content.push(
               
@@ -33,8 +33,6 @@ let content;
             </Card>
             </Col>
            
-            
-
             );
             }
         }

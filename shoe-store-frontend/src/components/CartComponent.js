@@ -76,10 +76,10 @@ function renderShippingCosts(){
      <h2>Subtotal: ${props.cart.amount}</h2> 
      <h6>+ shipping costs:${5.99}</h6>
     <h1>Total:${(props.cart.amount + renderShippingCosts())}</h1>
-     <Button size="lg" href="/shop">Keep Shopping</Button>
+     <Button size="lg" color="danger" href="/shop">Keep Shopping</Button>
     <br/>
     <br/>
-    <Button size="lg"  href="/paymentform">Check out</Button>
+    <Button size="lg" color="danger" href="/paymentform">Check out</Button>
     <br/>
     <br/>
     <Button color="danger" href="/cart" onClick={props.clearCart}>Clear</Button>

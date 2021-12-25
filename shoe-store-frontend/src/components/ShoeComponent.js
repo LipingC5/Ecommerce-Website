@@ -10,7 +10,9 @@ const ShoePage = (props) => {
     useEffect(() => {
         // take action when isVisible Changed
         //console.log("useEffect: "  + Size);
-        search(selectedShoe.sku);
+        if(localStorage.getItem('token') != null){
+             search(selectedShoe.sku);
+        }
         //console.log(selectedShoe);
      }, [Size, selectedShoe])
 
@@ -29,9 +31,7 @@ const ShoePage = (props) => {
 
 
      const search = (sku) => {
-        console.log(Size);
         setSelectedShoe(stock.filter((shoe) => (shoe.sku == sku && shoe.size == Size) && shoe.inStock === true)[0]);
-        console.log(selectedShoe);
      }
 
      const handleClick = (option) => {
@@ -82,10 +82,10 @@ const ShoePage = (props) => {
              <br/>
              <Row>
               <Col>
-             <Button size="md" onClick={props.addShoeToCart(selectedShoe)} href="/cart">Buy Now</Button>
+             <Button size="md"  color="danger" onClick={props.addShoeToCart(selectedShoe)} href="/cart">Buy Now</Button>
              </Col>
              <Col>
-             <Button  onClick={props.addShoeToCart(selectedShoe)} href="/cart">Add To Cart</Button>
+             <Button color="danger" onClick={props.addShoeToCart(selectedShoe)} href="/cart">Add To Cart</Button>
              </Col>
              </Row>
              </Col>
